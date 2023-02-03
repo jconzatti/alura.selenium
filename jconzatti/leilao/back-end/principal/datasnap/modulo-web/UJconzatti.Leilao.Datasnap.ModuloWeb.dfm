@@ -18,73 +18,20 @@ object ModuloWeb: TModuloWeb
     Filters = <>
     AuthenticationManager = DSAuthenticationManager
     WebDispatch.PathInfo = 'datasnap*'
-    Left = 72
-    Top = 75
+    Left = 176
+    Top = 11
   end
   object DSAuthenticationManager: TDSAuthenticationManager
     OnUserAuthenticate = DSAuthenticationManagerUserAuthenticate
     OnUserAuthorize = DSAuthenticationManagerUserAuthorize
     Roles = <>
-    Left = 288
-    Top = 19
+    Left = 312
+    Top = 11
   end
   object DSServerClassExemplo: TDSServerClass
     OnGetClass = DSServerClassExemploGetClass
     Server = DSServer
-    Left = 152
-    Top = 11
-  end
-  object WebFileDispatcher: TWebFileDispatcher
-    WebFileExtensions = <
-      item
-        MimeType = 'text/css'
-        Extensions = 'css'
-      end
-      item
-        MimeType = 'text/javascript'
-        Extensions = 'js'
-      end
-      item
-        MimeType = 'image/x-png'
-        Extensions = 'png'
-      end
-      item
-        MimeType = 'text/html'
-        Extensions = 'htm;html'
-      end
-      item
-        MimeType = 'image/jpeg'
-        Extensions = 'jpg;jpeg;jpe'
-      end
-      item
-        MimeType = 'image/gif'
-        Extensions = 'gif'
-      end>
-    BeforeDispatch = WebFileDispatcherBeforeDispatch
-    WebDirectories = <
-      item
-        DirectoryAction = dirInclude
-        DirectoryMask = '*'
-      end
-      item
-        DirectoryAction = dirExclude
-        DirectoryMask = '\templates\*'
-      end>
-    RootDirectory = '.'
-    VirtualPath = '/'
-    Left = 72
-    Top = 120
-  end
-  object DSProxyGenerator: TDSProxyGenerator
-    ExcludeClasses = 'DSMetadata'
-    MetaDataProvider = DSServerMetaDataProvider
-    Writer = 'Java Script REST'
-    Left = 72
-    Top = 176
-  end
-  object DSServerMetaDataProvider: TDSServerMetaDataProvider
-    Server = DSServer
-    Left = 64
-    Top = 232
+    Left = 56
+    Top = 83
   end
 end

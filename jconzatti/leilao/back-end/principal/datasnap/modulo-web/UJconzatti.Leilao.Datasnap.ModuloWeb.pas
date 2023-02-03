@@ -28,9 +28,6 @@ type
     DSServer: TDSServer;
     DSAuthenticationManager: TDSAuthenticationManager;
     DSServerClassExemplo: TDSServerClass;
-    WebFileDispatcher: TWebFileDispatcher;
-    DSProxyGenerator: TDSProxyGenerator;
-    DSServerMetaDataProvider: TDSServerMetaDataProvider;
     procedure DSServerClassExemploGetClass(DSServerClass: TDSServerClass;
       var PersistentClass: TPersistentClass);
     procedure DSAuthenticationManagerUserAuthorize(Sender: TObject;
@@ -40,9 +37,6 @@ type
       UserRoles: TStrings);
     procedure WebModule1DefaultHandlerAction(Sender: TObject;
       Request: TWebRequest; Response: TWebResponse; var Handled: Boolean);
-    procedure WebFileDispatcherBeforeDispatch(Sender: TObject;
-      const AFileName: string; Request: TWebRequest; Response: TWebResponse;
-      var Handled: Boolean);
   private
     { Private declarations }
   public
@@ -61,8 +55,8 @@ procedure TModuloWeb.WebModule1DefaultHandlerAction(Sender: TObject;
   Request: TWebRequest; Response: TWebResponse; var Handled: Boolean);
 begin
    Response.Content := '<html>' +
-                       '<head><title>DataSnap Server</title></head>' +
-                       '<body>DataSnap Server</body>' +
+                       '<head><title>Leilões</title></head>' +
+                       '<body>Projeto para manutenção de leilões</body>' +
                        '</html>';
 end;
 
@@ -84,23 +78,6 @@ procedure TModuloWeb.DSAuthenticationManagerUserAuthorize(
   var valid: Boolean);
 begin
    valid := True;
-end;
-
-procedure TModuloWeb.WebFileDispatcherBeforeDispatch(Sender: TObject;
-  const AFileName: string; Request: TWebRequest; Response: TWebResponse;
-  var Handled: Boolean);
-var D1, D2: TDateTime;
-begin
-   Handled := False;
-   if SameFileName(ExtractFileName(AFileName), 'serverfunctions.js') then
-   begin
-      if not FileExists(AFileName) or (FileAge(AFileName, D1) and FileAge(WebApplicationFileName, D2) and (D1 < D2)) then
-      begin
-         DSProxyGenerator.TargetDirectory := ExtractFilePath(AFileName);
-         DSProxyGenerator.TargetUnitName := ExtractFileName(AFileName);
-         DSProxyGenerator.Write;
-      end;
-   end;
 end;
 
 initialization
